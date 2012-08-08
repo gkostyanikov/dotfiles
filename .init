@@ -16,7 +16,8 @@ mkdir -p "$download_dir"
 curl -L "$url" -o "${download_dir}/${zip}"
 
 printf "===> Installing /Applications/iTerm2.app ...\n"
-unzip -q "${download_dir}/${zip}" -d /Applications/
+unzip -q "${download_dir}/${zip}"
+cp "${download_dir}/iTerm.app" ~/Applications
 
 printf "===> Cleaning up $download_dir ...\n"
 rm -rf "$download_dir"
