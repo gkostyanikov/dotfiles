@@ -25,7 +25,7 @@ ruby -v
 
 brew install tmux
 curl -O https://raw.github.com/gkostyanikov/dotfiles/master/.tmux.conf
-brew install vim
+brew install vim --with-python3 --without-python
 curl -O https://raw.github.com/gkostyanikov/dotfiles/master/.vimrc
 
 ###############################################################################
