@@ -340,6 +340,7 @@ for app in "Address Book" "Contacts" "iCal" "Calendar" "Dock" "Finder" "Mail" \
 done
 echo "Done. Note that some of these changes require a logout/restart to take effect."
 
+exec $SHELL -l
 
 
 
