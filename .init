@@ -27,6 +27,8 @@ brew install tmux
 curl -O https://raw.github.com/gkostyanikov/dotfiles/master/.tmux.conf
 brew install vim --with-python3 --without-python
 curl -O https://raw.github.com/gkostyanikov/dotfiles/master/.vimrc
+git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+vim +BundleInstall +qall
 
 ###############################################################################
 # General UI/UX                                                               #
