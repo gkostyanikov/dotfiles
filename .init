@@ -1,4 +1,6 @@
-o#!/bin/bash
+#!/usr/bin/env bash
+
+# ~/.osx — http://mths.be/osx
 
 # Ask for the administrator password upfront
 sudo -v
@@ -24,7 +26,8 @@ ruby -v
 # General UI/UX                                                               #
 ###############################################################################
 
-
+# Set standby delay to 24 hours (default is 1 hour)
+sudo pmset -a standbydelay 86400
 
 
 # Menu bar: hide the useless Time Machine and Volume icons
