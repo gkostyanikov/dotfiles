@@ -24,7 +24,9 @@ echo 'eval "$(rbenv init -)"' >> ~/.zshrc
 ruby -v
 
 brew install tmux
+curl -O https://raw.github.com/gkostyanikov/dotfiles/master/.tmux.conf
 brew install vim
+curl -O https://raw.github.com/gkostyanikov/dotfiles/master/.vimrc
 
 ###############################################################################
 # General UI/UX                                                               #
