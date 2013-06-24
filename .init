@@ -18,10 +18,11 @@ echo "Changing shell"
 curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 
 brew install rbenv
-brew install ruby-build
+git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+rbenv install 2.0.0-p195
+rbenv global 2.0.0-p195
 echo 'export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$HOME/.rbenv/bin:$PATH"' >> ~/.zshrc
 echo 'eval "$(rbenv init -)"' >> ~/.zshrc
-ruby -v
 
 brew install https://gist.github.com/gkostyanikov/5848689/raw/12839555556286059a151c75161a493c5902cd52/tmux_iterm2.rb
 curl -O https://raw.github.com/gkostyanikov/dotfiles/master/.tmux.conf
@@ -342,6 +343,7 @@ done
 echo "Done. Note that some of these changes require a logout/restart to take effect."
 
 exec $SHELL -l
+ruby -v
 
 
 
