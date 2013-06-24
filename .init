@@ -23,7 +23,7 @@ echo 'export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$HOME/.rbenv/bin:$PATH"'
 echo 'eval "$(rbenv init -)"' >> ~/.zshrc
 ruby -v
 
-brew install tmux
+brew install https://gist.github.com/gkostyanikov/5848689/raw/12839555556286059a151c75161a493c5902cd52/tmux_iterm2.rb
 curl -O https://raw.github.com/gkostyanikov/dotfiles/master/.tmux.conf
 brew install vim --with-python3 --without-python
 curl -O https://raw.github.com/gkostyanikov/dotfiles/master/.vimrc
