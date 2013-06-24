@@ -13,6 +13,7 @@ ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
 brew doctor
 brew update
 brew install grc coreutils spark
+`brew --prefix`/etc/grc.bashrc
 brew install git
 
 echo "Changing shell"
