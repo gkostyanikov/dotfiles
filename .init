@@ -49,7 +49,7 @@ fi
 
 
 if ! builtin type -p pg_ctl -V &>/dev/null; then
-echo "INSTALLING ~> postgreslq"
+echo "INSTALLING ~> postgresql"
 brew install postgresql
 initdb /usr/local/var/postgres -E utf8
 ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
