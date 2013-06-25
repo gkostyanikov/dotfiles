@@ -23,6 +23,8 @@ brew install mysql
 initdb /usr/local/var/postgres -E utf8
 ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
 launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
+else
+echo "SKIPPING ~> mysql"
 fi
 
 
@@ -32,6 +34,7 @@ brew install postgresql
 initdb /usr/local/var/postgres -E utf8
 ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
 launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
+echo "SKIPPING ~> postgresql"
 fi
 
 echo "Changing shell"
