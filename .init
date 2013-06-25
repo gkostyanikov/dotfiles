@@ -78,7 +78,7 @@ fi
 
 
 
-if [ $(hash rbenv 2>/dev/null) ]
+if [ ! hash rbenv 2>/dev/null ]
 then
 echo "INSTALLING ~> rbenv"
 brew install rbenv
