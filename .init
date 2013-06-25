@@ -10,12 +10,16 @@ sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 
+if ! builtin type -p brew &>/dev/null; then
 echo "INSTALLING ~> homebrew"
 ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
 brew doctor
 brew install grc coreutils spark
 source `brew --prefix`/etc/grc.bashrc
-brew update
+else
+echo "SKIPPING ~> homebrew"
+fi
+
 
 if ! builtin type -p git &>/dev/null; then
 echo "INSTALLING ~> git"
@@ -25,7 +29,7 @@ echo "SKIPPING ~> git"
 fi
 
 
-if ! builtin type -p redis &>/dev/null; then
+if ! builtin type -p redis-cli &>/dev/null; then
 echo "INSTALLING ~> redis"
 brew install redis
 else
@@ -33,7 +37,7 @@ echo "SKIPPING ~> redis"
 fi
 
 
-if ! builtin type -p mysql &>/dev/null; then
+if ! builtin type -p mysql -V &>/dev/null; then
 echo "INSTALLING ~> mysql"
 brew install mysql
 initdb /usr/local/var/postgres -E utf8
@@ -44,11 +48,17 @@ echo "SKIPPING ~> mysql"
 fi
 
 
+if ! builtin type -p pg_ctl -V &>/dev/null; then
 echo "INSTALLING ~> postgreslq"
 brew install postgresql
 initdb /usr/local/var/postgres -E utf8
 ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
 launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
+else
+echo "SKIPPING ~> postgresql"
+fi
+
+
 
 
 if [ ! -d "$HOME/.zprezto" ]; then
@@ -57,8 +67,7 @@ git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$H
 chsh -s /bin/zsh
 fi
 
-if [ $(hash fasd 2>/dev/null) ]
-then
+if ! builtin type -p fasd &>/dev/null; then
 echo "INSTALLING ~> fasd"
 brew install fasd
 echo 'eval "$(fasd --init auto)"' >> ~/.zshrc
@@ -68,7 +77,7 @@ fi
 
 
 
-if hash rbenv 2>/dev/null; then
+if ! builtin type -p rbenv &>/dev/null; then
 echo "INSTALLING ~> rbenv"
 brew install rbenv
 git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
@@ -81,8 +90,7 @@ echo "SKIPPING ~> rbenv"
 fi
 
 
-if [ $(hash tmux 2>/dev/null) ]
-then
+if ! builtin type -p tmux -V &>/dev/null; then
 echo "INSTALLING ~> tmux"
 brew install https://gist.github.com/gkostyanikov/5848689/raw/12839555556286059a151c75161a493c5902cd52/tmux_iterm2.rb
 curl -O https://raw.github.com/gkostyanikov/dotfiles/master/.tmux.conf
@@ -90,8 +98,7 @@ else
 echo "SKIPPING ~> tmux"
 fi
 
-if $(vim -version &>/dev/null)
-then
+if ! builtin type -p vim -version &>/dev/null; then
 echo "INSTALLING ~> vim"
 brew install vim --with-python3 --without-python
 curl -O https://raw.github.com/gkostyanikov/dotfiles/master/.vimrc
