@@ -2,6 +2,7 @@
 
 # ~/.osx — http://mths.be/osx
 # http://stackoverflow.com/a/677212
+# diskutil repairPermissions /
 
 # Ask for the administrator password upfront
 sudo -v
