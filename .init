@@ -67,7 +67,7 @@ git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$H
 chsh -s /bin/zsh
 fi
 
-if $(hash fasd 2>/dev/null) 
+if [ $(hash fasd 2>/dev/null) ]
 then
 echo "INSTALLING ~> fasd"
 brew install fasd
