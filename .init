@@ -78,8 +78,7 @@ fi
 
 
 
-if [ hash rbenv 2>/dev/null ]
-then
+if hash rbenv 2>/dev/null; then
 echo "INSTALLING ~> rbenv"
 brew install rbenv
 git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
