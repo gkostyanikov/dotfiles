@@ -20,20 +20,28 @@ brew update
 if ! builtin type -p git &>/dev/null; then
 echo "INSTALLING ~> git"
 brew install git
+else
+echo "SKIPPING ~> git"
 fi
 
 
 if ! builtin type -p redis &>/dev/null; then
 echo "INSTALLING ~> redis"
 brew install redis
+else
+echo "SKIPPING ~> redis"
 fi
 
 
+if ! builtin type -p mysql &>/dev/null; then
 echo "INSTALLING ~> mysql"
 brew install mysql
 initdb /usr/local/var/postgres -E utf8
 ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
 launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
+else
+echo "SKIPPING ~> mysql"
+fi
 
 
 echo "INSTALLING ~> postgreslq"
