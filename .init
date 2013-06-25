@@ -32,8 +32,17 @@ fi
 if ! builtin type -p redis-cli &>/dev/null; then
 echo "INSTALLING ~> redis"
 brew install redis
+ln -sfv /usr/local/opt/redis/*.plist ~/Library/LaunchAgents
+launchctl load ~/Library/LaunchAgents/homebrew.mxcl.redis.plist
 else
 echo "SKIPPING ~> redis"
+fi
+
+if ! builtin type -p node &>/dev/null; then
+echo "INSTALLING ~> node"
+brew install node
+else
+echo "SKIPPING ~> node"
 fi
 
 
