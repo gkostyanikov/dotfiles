@@ -26,7 +26,7 @@ else
 echo "SKIPPING ~> git"
 fi
 
-if $(redis-cli &>/dev/null)
+if $(redis-cli PING &>/dev/null)
 then
 brew install redis
 else
