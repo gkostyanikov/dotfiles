@@ -11,6 +11,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 if $(brew &>/dev/null)
 then
+echo "INSTALLING ~> homebrew"
 ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
 brew doctor
 brew install grc coreutils spark
@@ -22,6 +23,7 @@ fi
 
 if $(git &>/dev/null)
 then
+echo "INSTALLING ~> git"
 brew install git
 else
 echo "SKIPPING ~> git"
@@ -29,6 +31,7 @@ fi
 
 if $(redis-cli PING &>/dev/null)
 then
+echo "INSTALLING ~> redis"
 brew install redis
 else
 echo "SKIPPING ~> redis"
@@ -37,6 +40,7 @@ fi
 
 if $(mysql &>/dev/null)
 then
+echo "INSTALLING ~> mysql"
 brew install mysql
 initdb /usr/local/var/postgres -E utf8
 ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
@@ -48,6 +52,7 @@ fi
 
 if $(pg_ctl &>/dev/null)
 then
+echo "INSTALLING ~> postgreslq"
 brew install postgresql
 initdb /usr/local/var/postgres -E utf8
 ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
@@ -56,15 +61,15 @@ else
 echo "SKIPPING ~> postgresql"
 fi
 
-echo "Changing shell"
-
 if [ ! -d "$HOME/.zprezto" ]; then
+echo "INSTALLING ~> prezto"
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 chsh -s /bin/zsh
 fi
 
-if [ $(command -v fasd >/dev/null 2>&1) ]
+if [ $(hash fasd 2>/dev/null) ]
 then
+echo "INSTALLING ~> fasd"
 brew install fasd
 echo 'eval "$(fasd --init auto)"' >> ~/.zshrc
 else
@@ -73,8 +78,9 @@ fi
 
 
 
-if [ $(type rbenv >/dev/null 2>&1) ]
+if [ $(hash rbenv 2>/dev/null) ]
 then
+echo "INSTALLING ~> rbenv"
 brew install rbenv
 git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 echo 'export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$HOME/.rbenv/bin:$PATH"' >> ~/.zshrc
@@ -88,6 +94,7 @@ fi
 
 if [ $(hash tmux 2>/dev/null) ]
 then
+echo "INSTALLING ~> tmux"
 brew install https://gist.github.com/gkostyanikov/5848689/raw/12839555556286059a151c75161a493c5902cd52/tmux_iterm2.rb
 curl -O https://raw.github.com/gkostyanikov/dotfiles/master/.tmux.conf
 else
@@ -96,6 +103,7 @@ fi
 
 if $(vim -version &>/dev/null)
 then
+echo "INSTALLING ~> vim"
 brew install vim --with-python3 --without-python
 curl -O https://raw.github.com/gkostyanikov/dotfiles/master/.vimrc
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
