@@ -9,57 +9,39 @@ sudo -v
 # Keep-alive: update existing `sudo` time stamp until `.osx` has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-if $(brew &>/dev/null)
-then
+
 echo "INSTALLING ~> homebrew"
 ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
 brew doctor
 brew install grc coreutils spark
 source `brew --prefix`/etc/grc.bashrc
-else
-echo "UPDATING ~> homebrew"
 brew update
-fi
 
-if $(git &>/dev/null)
-then
+if ! builtin type -p git &>/dev/null; then
 echo "INSTALLING ~> git"
 brew install git
-else
-echo "SKIPPING ~> git"
 fi
 
-if $(redis-cli PING &>/dev/null)
-then
+
+if ! builtin type -p redis &>/dev/null; then
 echo "INSTALLING ~> redis"
 brew install redis
-else
-echo "SKIPPING ~> redis"
 fi
 
 
-if $(mysql &>/dev/null)
-then
 echo "INSTALLING ~> mysql"
 brew install mysql
 initdb /usr/local/var/postgres -E utf8
 ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
 launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
-else
-echo "SKIPPING ~> mysql"
-fi
 
 
-if $(pg_ctl &>/dev/null)
-then
 echo "INSTALLING ~> postgreslq"
 brew install postgresql
 initdb /usr/local/var/postgres -E utf8
 ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
 launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
-else
-echo "SKIPPING ~> postgresql"
-fi
+
 
 if [ ! -d "$HOME/.zprezto" ]; then
 echo "INSTALLING ~> prezto"
