@@ -45,12 +45,13 @@ echo "SKIPPING ~> mysql"
 fi
 
 
-if $(pg_ctl --help &>/dev/null)
+if $(pg_ctl &>/dev/null)
 then
 brew install postgresql
 initdb /usr/local/var/postgres -E utf8
 ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
 launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
+else
 echo "SKIPPING ~> postgresql"
 fi
 
