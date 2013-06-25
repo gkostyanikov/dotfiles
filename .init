@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # ~/.osx — http://mths.be/osx
+# http://stackoverflow.com/a/677212
 
 # Ask for the administrator password upfront
 sudo -v
@@ -62,7 +63,7 @@ git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$H
 chsh -s /bin/zsh
 fi
 
-if $(fasd &>/dev/null)
+if $(hash fasd 2>/dev/null)
 then
 brew install fasd
 echo 'eval "$(fasd --init auto)"' >> ~/.zshrc
@@ -72,7 +73,7 @@ fi
 
 
 
-if $(which rbenv &>/dev/null)
+if $(hash rbenv 2>/dev/null)
 then
 brew install rbenv
 git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
@@ -85,7 +86,7 @@ echo "SKIPPING ~> rbenv"
 fi
 
 
-if $(which tmux &>/dev/null)
+if $(hash tmux 2>/dev/null)
 then
 brew install https://gist.github.com/gkostyanikov/5848689/raw/12839555556286059a151c75161a493c5902cd52/tmux_iterm2.rb
 curl -O https://raw.github.com/gkostyanikov/dotfiles/master/.tmux.conf
