@@ -129,13 +129,13 @@ else
 echo "SKIPPING ~> brew cask"
 fi
 
-if [ ! -f "~/Applications/nvALT.app" ]; then
+if [ ! -f "$HOME/Applications/nvALT.app" ]; then
 brew cask install nv-alt
 else
 echo "SKIPPING ~> nv-alt"
 fi
 
-if [ ! -f "~/Applications/Caffeine.app" ]; then
+if [ ! -e "~/Applications/Caffeine.app" ]; then
 brew cask install caffeine
 else
 echo "SKIPPING ~> caffeine"
