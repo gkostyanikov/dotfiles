@@ -141,6 +141,18 @@ else
 echo "SKIPPING ~> caffeine"
 fi
 
+if ! builtin type -p iterm &>/dev/null; then
+brew cask install iterm2
+else
+echo "SKIPPING ~> iterm2"
+fi
+
+if ! builtin type -p pg-commander &>/dev/null; then
+brew cask install pg-commander
+else
+echo "SKIPPING ~> pg-commander"
+fi
+
 
 echo "INSTALLING GEMS"
 gem install bundler
