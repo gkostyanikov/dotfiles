@@ -129,7 +129,7 @@ else
 echo "SKIPPING ~> brew cask"
 fi
 
-if [ ! -f "~/Applications/nvAlt.app" ]; then
+if [ ! -f "~/Applications/nvALT.app" ]; then
 brew cask install nv-alt
 else
 echo "SKIPPING ~> nv-alt"
@@ -147,13 +147,13 @@ else
 echo "SKIPPING ~> iterm2"
 fi
 
-if ! builtin type -p pg-commander &>/dev/null; then
+if [ ! -f "~/Applications/PG Commander.app" ]; then
 brew cask install pg-commander
 else
 echo "SKIPPING ~> pg-commander"
 fi
 
-if ! builtin type -p google-chrome &>/dev/null; then
+if [ ! -f "~/Applications/Google Chrome.app" ]; then
 brew cask install google-chrome
 else
 echo "SKIPPING ~> google-chrome"
@@ -165,7 +165,7 @@ else
 echo "SKIPPING ~> transmission"
 fi
 
-if ! builtin type -p f-lux &>/dev/null; then
+if [ ! -f "~/Applications/Flux.app" ]; then
 brew cask install f-lux
 else
 echo "SKIPPING ~> f-lux"
