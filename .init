@@ -122,6 +122,20 @@ echo "SKIPPING ~> vim"
 fi
 
 
+if ! builtin type -p brew cask &>/dev/null; then
+brew tap phinze/homebrew-cask
+brew install brew-cask
+else
+echo "SKIPPING ~> brew cask"
+fi
+
+if ! builtin type -p nv-alt &>/dev/null; then
+brew cask install nv-alt
+else
+echo "SKIPPING ~> nv-alt"
+fi
+
+
 echo "INSTALLING GEMS"
 gem install bundler
 
