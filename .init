@@ -135,6 +135,12 @@ else
 echo "SKIPPING ~> nv-alt"
 fi
 
+if ! builtin type -p caffeine &>/dev/null; then
+brew cask install caffeine
+else
+echo "SKIPPING ~> caffeine"
+fi
+
 
 echo "INSTALLING GEMS"
 gem install bundler
