@@ -47,6 +47,13 @@ else
 echo "SKIPPING ~> the_silver_searcher"
 fi
 
+if ! builtin type -p ssh-copy-id &>/dev/null; then
+echo "INSTALLING ~> ssh-copy-id"
+brew install ssh-copy-id
+else
+echo "SKIPPING ~> ssh-copy-id"
+fi
+
 if [ ! -d "$HOME/.zprezto" ]; then
 echo "INSTALLING ~> prezto"
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
@@ -562,6 +569,7 @@ read email
 ssh-keygen -t rsa -C "$email"
 pbcopy < ~/.ssh/id_rsa.pub
 
-exec $SHELL -l
+echo "NEXT STEPS"
+echo "ssh-copy-id -i ~/.ssh/id_rsa.pub root@192.168.1.1"
 
 
