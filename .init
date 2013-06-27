@@ -536,7 +536,7 @@ for app in "Address Book" "Contacts" "iCal" "Calendar" "Dock" "Finder" "Mail" \
 	killall "$app" > /dev/null 2>&1
 done
 
-exec $SHELL -l
+
 
 
 echo "SSH KEYS GENERATION"
@@ -549,5 +549,6 @@ read email
 ssh-keygen -t rsa -C "$email"
 pbcopy < ~/.ssh/id_rsa.pub
 
+exec $SHELL -l
 
 
