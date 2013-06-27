@@ -186,6 +186,17 @@ fi
 echo "INSTALLING GEMS"
 gem install bundler
 
+
+function randpass() {
+  [ "$2" == "0" ] && CHAR="[:alnum:]" || CHAR="[:graph:]"
+    cat /dev/urandom | tr -cd "$CHAR" | head -c ${1:-32}
+    echo
+}
+
+echo "SSH KEYS GENERATION"
+randpass
+cd ~/.ssh
+
 ###############################################################################
 # General UI/UX                                                               #
 ###############################################################################
@@ -533,10 +544,9 @@ for app in "Address Book" "Contacts" "iCal" "Calendar" "Dock" "Finder" "Mail" \
 	"Safari" "iTunes" "SystemUIServer" "Terminal" "Twitter"; do
 	killall "$app" > /dev/null 2>&1
 done
-echo "Done. Note that some of these changes require a logout/restart to take effect."
 
 exec $SHELL -l
-ruby -v
+
 
 
 
