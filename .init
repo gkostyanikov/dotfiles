@@ -188,7 +188,7 @@ gem install bundler
 
 echo "Would you like me generate some ssh keys for you? yes/no"
 read response
-if "$response" == "yes"; then
+if $response" = "yes"; then
 echo "SSH KEYS GENERATION"
 echo "============PASSPHRASE============"
 openssl rand -base64 40
