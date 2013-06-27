@@ -187,15 +187,15 @@ echo "INSTALLING GEMS"
 gem install bundler
 
 
-function randpass() {
-  [ "$2" == "0" ] && CHAR="[:alnum:]" || CHAR="[:graph:]"
-    cat /dev/urandom | tr -cd "$CHAR" | head -c ${1:-32}
-    echo
-}
-
 echo "SSH KEYS GENERATION"
-randpass
+echo "============PASSPHRASE============"
+rand -base64 40
+echo "============PASSPHRASE============"
 cd ~/.ssh
+echo -n "Enter your email > "
+read email
+ssh-keygen -t rsa -C "$email"
+pbcopy < ~/.ssh/id_rsa.pub
 
 ###############################################################################
 # General UI/UX                                                               #
