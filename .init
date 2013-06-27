@@ -29,7 +29,7 @@ brew install grc coreutils spark
 source `brew --prefix`/etc/grc.bashrc
 else
 echo "SKIPPING ~> homebrew"
-brew update
+#brew update
 fi
 
 
@@ -188,7 +188,7 @@ gem install bundler
 
 echo "Would you like me generate some ssh keys for you? yes/no"
 read response
-if $response" = "yes"; then
+if $response = "yes"; then
 echo "SSH KEYS GENERATION"
 echo "============PASSPHRASE============"
 openssl rand -base64 40
