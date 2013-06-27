@@ -29,6 +29,7 @@ brew install grc coreutils spark
 source `brew --prefix`/etc/grc.bashrc
 else
 echo "SKIPPING ~> homebrew"
+brew update
 fi
 
 
