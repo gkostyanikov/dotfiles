@@ -29,6 +29,17 @@ else
 echo "SKIPPING ~> git"
 fi
 
+if [ ! -d "$HOME/.zprezto" ]; then
+echo "INSTALLING ~> prezto"
+git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+echo "for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+done"
+echo -n "Execute code above and press ENTER > "
+read text
+chsh -s /bin/zsh
+fi
+
 
 if ! builtin type -p redis-cli &>/dev/null; then
 echo "INSTALLING ~> redis"
@@ -71,15 +82,7 @@ fi
 
 
 
-if [ ! -d "$HOME/.zprezto" ]; then
-echo "INSTALLING ~> prezto"
-git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-echo "for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-done"
-sleep 2m
-chsh -s /bin/zsh
-fi
+
 
 if ! builtin type -p fasd &>/dev/null; then
 echo "INSTALLING ~> fasd"
@@ -123,12 +126,7 @@ echo "SKIPPING ~> vim"
 fi
 
 
-if ! builtin type -p brew cask &>/dev/null; then
-brew tap phinze/homebrew-cask
-brew install brew-cask
-else
-echo "SKIPPING ~> brew cask"
-fi
+ 
 
 if [ ! -f "$HOME/Applications/nvALT.app" ]; then
 brew cask install nv-alt
