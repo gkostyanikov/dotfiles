@@ -158,6 +158,12 @@ else
 echo "SKIPPING ~> iterm2"
 fi
 
+if ! ls ~/Applications | grep Dropbox.app &>/dev/null; then
+brew cask install dropbox
+else
+echo "SKIPPING ~> dropbox"
+fi
+
 if ! ls ~/Applications | grep PG\ Commander.app &>/dev/null; then
 brew cask install pg-commander
 else
