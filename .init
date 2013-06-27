@@ -189,10 +189,10 @@ gem install bundler
 
 echo "SSH KEYS GENERATION"
 echo "============PASSPHRASE============"
-rand -base64 40
+openssl rand -base64 40
 echo "============PASSPHRASE============"
 cd ~/.ssh
-echo -n "Enter your email > "
+echo "Enter your email > "
 read email
 ssh-keygen -t rsa -C "$email"
 pbcopy < ~/.ssh/id_rsa.pub
