@@ -40,6 +40,13 @@ else
 echo "SKIPPING ~> git"
 fi
 
+if ! builtin type -p ag &>/dev/null; then
+echo "INSTALLING ~> the_siver_searcher"
+brew install the_silver_searcher
+else
+echo "SKIPPING ~> the_silver_searcher"
+fi
+
 if [ ! -d "$HOME/.zprezto" ]; then
 echo "INSTALLING ~> prezto"
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
