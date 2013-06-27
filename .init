@@ -3,6 +3,7 @@
 # ~/.osx — http://mths.be/osx
 # http://stackoverflow.com/a/677212
 # diskutil repairPermissions /
+# https://discussions.apple.com/thread/3353054?start=0&tstart=0
 
 if ! builtin type -p xcode-select --version &>/dev/null; then
 echo "INSTALL XCODE BEFORE"
@@ -137,43 +138,43 @@ echo "SKIPPING ~> vim"
 fi
 
 
-if [ ! -f "$HOME/Applications/nvALT.app" ]; then
+if ! ls ~/Applications | grep nvALT.app &>/dev/null; then
 brew cask install nv-alt
 else
 echo "SKIPPING ~> nv-alt"
 fi
 
-if [ ! -e "~/Applications/Caffeine.app" ]; then
+if ! ls ~/Applications | grep Caffeine.app &>/dev/null; then
 brew cask install caffeine
 else
 echo "SKIPPING ~> caffeine"
 fi
 
-if [ ! -f "~/Applications/iTerm.app" ]; then
+if ! ls ~/Applications | grep iTerm.app &>/dev/null; then
 brew cask install iterm2
 else
 echo "SKIPPING ~> iterm2"
 fi
 
-if [ ! -f "~/Applications/PG Commander.app" ]; then
+if ! ls ~/Applications | grep PG\ Commander.app &>/dev/null; then
 brew cask install pg-commander
 else
 echo "SKIPPING ~> pg-commander"
 fi
 
-if [ ! -f "~/Applications/Google Chrome.app" ]; then
+if ! ls ~/Applications | grep Google\ Chrome.app &>/dev/null; then
 brew cask install google-chrome
 else
 echo "SKIPPING ~> google-chrome"
 fi
 
-if [ ! -f "~/Applications/Transmission.app" ]; then
+if ! ls ~/Applications | grep Transmission.app &>/dev/null; then
 brew cask install transmission
 else
 echo "SKIPPING ~> transmission"
 fi
 
-if [ ! -f "~/Applications/Flux.app" ]; then
+if ! ls ~/Applications | grep Flux.app &>/dev/null; then
 brew cask install f-lux
 else
 echo "SKIPPING ~> f-lux"
