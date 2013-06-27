@@ -4,12 +4,21 @@
 # http://stackoverflow.com/a/677212
 # diskutil repairPermissions /
 
+if ! builtin type -p xcode-select --version &>/dev/null; then
+echo "INSTALL XCODE BEFORE"
+exit
+else
+echo "XCODE ~> OK"
+fi
+
+
 # Ask for the administrator password upfront
 sudo -v
 
 # Keep-alive: update existing `sudo` time stamp until `.osx` has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
+cd ~
 
 if ! builtin type -p brew &>/dev/null; then
 echo "INSTALLING ~> homebrew"
@@ -32,10 +41,12 @@ fi
 if [ ! -d "$HOME/.zprezto" ]; then
 echo "INSTALLING ~> prezto"
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+echo "========================================="
 echo "for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
 ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
 done"
-echo -n "Execute code above and press ENTER > "
+echo "========================================="
+echo -n "Execute code above and press ENTER TO CONTINUE "
 read text
 chsh -s /bin/zsh
 fi
