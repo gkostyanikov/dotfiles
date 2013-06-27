@@ -43,8 +43,9 @@ if [ ! -d "$HOME/.zprezto" ]; then
 echo "INSTALLING ~> prezto"
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 echo "========================================="
-echo "for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+echo "setopt EXTENDED_GLOB
+for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+  ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
 done"
 echo "========================================="
 echo -n "Execute code above and press ENTER TO CONTINUE "
