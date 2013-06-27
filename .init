@@ -137,8 +137,6 @@ echo "SKIPPING ~> vim"
 fi
 
 
- 
-
 if [ ! -f "$HOME/Applications/nvALT.app" ]; then
 brew cask install nv-alt
 else
