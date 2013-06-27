@@ -188,7 +188,7 @@ gem install bundler
 
 echo "Would you like me generate some ssh keys for you? yes/no"
 read response
-if $response == "yes"; then
+if ["$response" == "yes"]; then
 echo "SSH KEYS GENERATION"
 echo "============PASSPHRASE============"
 openssl rand -base64 40
@@ -198,6 +198,8 @@ echo "Enter your email > "
 read email
 ssh-keygen -t rsa -C "$email"
 pbcopy < ~/.ssh/id_rsa.pub
+else
+echo "SKIPPING..."
 fi
 
 
