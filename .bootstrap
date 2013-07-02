@@ -13,6 +13,10 @@ echo "XCODE ~> OK"
 fi
 
 
+
+brew install python3 --with-brewed-openssl
+
+
 # Ask for the administrator password upfront
 sudo -v
 
@@ -145,7 +149,7 @@ fi
 
 if ! builtin type -p vim -version &>/dev/null; then
 echo "INSTALLING ~> vim"
-brew install vim --with-python3
+brew install vim --with-python3 --without-python
 curl -O https://raw.github.com/gkostyanikov/dotfiles/master/.vimrc
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 vim +BundleInstall +qall
