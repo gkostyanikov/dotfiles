@@ -36,12 +36,25 @@ echo "SKIPPING ~> homebrew"
 #brew update
 fi
 
-
 if ! builtin type -p git &>/dev/null; then
 echo "INSTALLING ~> git"
 brew install git
 else
 echo "SKIPPING ~> git"
+fi
+
+if ! builtin type -p hg -v &>/dev/null; then
+echo "INSTALLING ~> mercurial"
+brew install mercurial
+else
+echo "SKIPPING ~> mercurial"
+fi
+
+if ! builtin type -p fish -v &>/dev/null; then
+echo "INSTALLING ~> fish"
+brew install fish
+else
+echo "SKIPPING ~> fish"
 fi
 
 if ! builtin type -p ag &>/dev/null; then
@@ -56,20 +69,6 @@ echo "INSTALLING ~> ssh-copy-id"
 brew install ssh-copy-id
 else
 echo "SKIPPING ~> ssh-copy-id"
-fi
-
-if [ ! -d "$HOME/.zprezto" ]; then
-echo "INSTALLING ~> prezto"
-git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-echo "========================================="
-echo "setopt EXTENDED_GLOB
-for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-  ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-done"
-echo "========================================="
-echo -n "Execute code above and press ENTER TO CONTINUE "
-read text
-chsh -s /bin/zsh
 fi
 
 
@@ -90,17 +89,6 @@ echo "SKIPPING ~> node"
 fi
 
 
-if ! builtin type -p mysql -V &>/dev/null; then
-echo "INSTALLING ~> mysql"
-brew install mysql
-initdb /usr/local/var/postgres -E utf8
-ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
-launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
-else
-echo "SKIPPING ~> mysql"
-fi
-
-
 if ! builtin type -p pg_ctl -V &>/dev/null; then
 echo "INSTALLING ~> postgresql"
 brew install postgresql
@@ -110,11 +98,6 @@ launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
 else
 echo "SKIPPING ~> postgresql"
 fi
-
-
-
-
-
 
 if ! builtin type -p fasd &>/dev/null; then
 echo "INSTALLING ~> fasd"
@@ -145,13 +128,6 @@ brew install https://gist.github.com/gkostyanikov/5848689/raw/12839555556286059a
 curl -O https://raw.github.com/gkostyanikov/dotfiles/master/.tmux.conf
 else
 echo "SKIPPING ~> tmux"
-fi
-
-if ! builtin type -p hg -v &>/dev/null; then
-echo "INSTALLING ~> mercurial"
-brew install mercurial
-else
-echo "SKIPPING ~> mercurial"
 fi
 
 if ! builtin type -p vim -version &>/dev/null; then
