@@ -9,7 +9,7 @@ set shell=/bin/zsh
 
 set nocompatible               " be iMproved
 filetype off                   " required!
-set invlist
+"set invlist
 set shiftwidth=4
 set autoindent
 set autowrite
@@ -18,7 +18,7 @@ set incsearch
 set textwidth=80
 set number
 "Exp section
-set spell
+"set spell
 "set cursorline
 set showmode
 set backspace=indent,eol,start
@@ -29,59 +29,76 @@ set foldenable
 set scrolloff=3
 set noswapfile
 
+
+" automatically reload vimrc when it's saved
+au BufWritePost .vimrc so ~/.vimrc
+
+"Reselect visual block after indent/outdent
+vnoremap < <gv
+vnoremap > >gv
+
+" Improve up/down movement on wrapped lines
+nnoremap j gj
+nnoremap k gk
+
+" Force saving root required files
+cmap w!! %!sudo tee > /dev/null %
+
+" Clear search highlights
+noremap <silent><Leader>/ :nohls<CR>
+
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
 
 " Productivity
-Bundle 'Shougo/unite.vim'
+Bundle 'Valloric/YouCompleteMe'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'tpope/vim-endwise'
 Bundle 'scrooloose/syntastic'
-"Bundle 'AutoComplPop'
 Bundle 'tpope/vim-surround'
-Bundle 'ervandew/supertab'
 Bundle 'unimpaired.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'godlygeek/tabular'
-Bundle 'skammer/vim-css-color'
-Bundle 'tpope/vim-fugitive'
-Bundle "myusuf3/numbers.vim"
+Bundle 'gkz/vim-ls'
 
 " Syntax, Indentination & Language-Centric Stuff
-Bundle 'kchmck/vim-coffee-script'
 Bundle 'git@github.com:slim-template/vim-slim.git'
 Bundle 'cakebaker/scss-syntax.vim'
 Bundle 'c.vim'
 Bundle 'Markdown'
-Bundle 'skwp/vim-rspec'
 Bundle 'tpope/vim-rake'
 Bundle 'jimenezrick/vimerl'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'rails.vim'
-Bundle 'wting/rust.vim'
+Bundle 'vim-scripts/slimv.vim'
+Bundle 'derekwyatt/vim-scala'
+Bundle 'sickill/vim-pasta'
 
 " Other stuff
-Bundle 'mikewest/vimroom'
-Bundle 'taskpaper.vim'
+Bundle 'ekoeppen/taskpaper.vim'
 
 "ColorScheme
 Bundle 'desert-warm-256'
 
 filetype plugin indent on     " required!
+set t_Co=256
 colorscheme desert-warm-256
 
 " Mappings
-let g:ctrlp_map                   = '<C-p>'
+let g:ctrlp_map        = '<C-p>'
+let g:ctrlp_cmd        = 'CtrlPLastMode'
+let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
+
 let g:rubycomplete_buffer_loading = 1
 let g:rubycomplete_rails          = 1
 let mapleader                     = ','
 
 nmap <Leader><C-t> :TagbarToggle<CR>
-nmap <Leader><C-n> :NumbersToggle<CR>
 nmap <Leader><C-c> :CtrlPClearCache<CR>
+
 
 map <D-S-]> gt
 map <D-S-[> gT
@@ -112,5 +129,4 @@ vmap <C-j> [egv
 vmap <C-k> ]egv
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|node_modules)$'
