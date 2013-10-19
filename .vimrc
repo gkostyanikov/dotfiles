@@ -3,7 +3,7 @@ set guioptions-=T
 
 syntax on
 
-set shell=/bin/zsh
+set shell=/bin/bash
 
 "autocmd VimEnter * colorscheme solarized
 
@@ -76,6 +76,7 @@ Bundle 'rails.vim'
 Bundle 'vim-scripts/slimv.vim'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'sickill/vim-pasta'
+Bundle 'Blackrush/vim-gocode'
 
 " Other stuff
 Bundle 'ekoeppen/taskpaper.vim'
