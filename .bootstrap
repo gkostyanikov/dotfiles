@@ -44,7 +44,12 @@ fi
 
 if ! builtin type -p fish -v &>/dev/null; then
 echo "INSTALLING ~> fish"
-brew install fish
+git clone https://github.com/fish-shell/fish-shell /tmp/fish-shell
+cd /tmp/fish-shell
+autoconf
+./configure
+make
+sudo make install
 else
 echo "SKIPPING ~> fish"
 fi
