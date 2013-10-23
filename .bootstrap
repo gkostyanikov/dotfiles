@@ -99,7 +99,7 @@ VIM_VERSION=$(vim -version 2>&1)
 if $VIM_VERSION == *"7.3"*; then
 echo "INSTALLING ~> vim"
 brew install vim --dev
-curl -O https://raw.github.com/gkostyanikov/dotfiles/master/.vimrc
+curl https://raw.github.com/gkostyanikov/dotfiles/master/.vimrc > $HOME/.vimrc
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 vim +BundleInstall +qall
 fi
@@ -163,6 +163,7 @@ else
 echo "SKIPPING ~> vagrant"
 fi
 
+curl https://raw.github.com/gkostyanikov/dotfiles/master/.gemrc > $HOME/.gemrc
 
 
 ###############################################################################
