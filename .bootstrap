@@ -14,9 +14,6 @@ fi
 
 
 
-# brew install python3 --with-brewed-openssl
-
-
 # Ask for the administrator password upfront
 sudo -v
 
@@ -69,34 +66,6 @@ echo "INSTALLING ~> ssh-copy-id"
 brew install ssh-copy-id
 else
 echo "SKIPPING ~> ssh-copy-id"
-fi
-
-
-if ! builtin type -p redis-cli &>/dev/null; then
-echo "INSTALLING ~> redis"
-brew install redis
-ln -sfv /usr/local/opt/redis/*.plist ~/Library/LaunchAgents
-launchctl load ~/Library/LaunchAgents/homebrew.mxcl.redis.plist
-else
-echo "SKIPPING ~> redis"
-fi
-
-if ! builtin type -p node &>/dev/null; then
-echo "INSTALLING ~> node"
-brew install node
-else
-echo "SKIPPING ~> node"
-fi
-
-
-if ! builtin type -p pg_ctl -V &>/dev/null; then
-echo "INSTALLING ~> postgresql"
-brew install postgresql
-initdb /usr/local/var/postgres -E utf8
-ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
-launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
-else
-echo "SKIPPING ~> postgresql"
 fi
 
 
@@ -157,12 +126,6 @@ else
 echo "SKIPPING ~> dropbox"
 fi
 
-if ! ls ~/Applications | grep PG\ Commander.app &>/dev/null; then
-brew cask install pg-commander
-else
-echo "SKIPPING ~> pg-commander"
-fi
-
 if ! ls ~/Applications | grep Google\ Chrome.app &>/dev/null; then
 brew cask install google-chrome
 else
@@ -180,10 +143,6 @@ brew cask install f-lux
 else
 echo "SKIPPING ~> f-lux"
 fi
-
-
-echo "INSTALLING GEMS"
-gem install bundler
 
 
 
