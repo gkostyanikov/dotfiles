@@ -50,6 +50,9 @@ autoconf
 ./configure
 make
 sudo make install
+grep -q '^/usr/local/bin/fish$' /etc/shells; or echo '/usr/local/bin/fish' | sudo tee -a /etc/shells
+chsh -s /usr/local/bin/fish
+curl https://raw.github.com/gkostyanikov/dotfiles/master/config.fish > $HOME/.config/fish/config.fish
 else
 echo "SKIPPING ~> fish"
 fi
