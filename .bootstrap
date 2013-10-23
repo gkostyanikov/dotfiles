@@ -150,7 +150,7 @@ else
 echo "SKIPPING ~> f-lux"
 fi
 
-if ! ls ~/Applications | grep VirtualBox.app &>/dev/null; then
+if ! ls /Applications | grep VirtualBox.app &>/dev/null; then
 brew cask install virtualbox
 else
 echo "SKIPPING ~> virtualbox"
