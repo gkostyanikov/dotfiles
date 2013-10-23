@@ -42,13 +42,6 @@ else
 echo "SKIPPING ~> git"
 fi
 
-if ! builtin type -p hg -v &>/dev/null; then
-echo "INSTALLING ~> mercurial"
-brew install mercurial
-else
-echo "SKIPPING ~> mercurial"
-fi
-
 if ! builtin type -p fish -v &>/dev/null; then
 echo "INSTALLING ~> fish"
 brew install fish
@@ -144,6 +137,12 @@ if ! ls ~/Applications | grep Flux.app &>/dev/null; then
 brew cask install f-lux
 else
 echo "SKIPPING ~> f-lux"
+fi
+
+if ! ls ~/Applications | grep VirtualBox.app &>/dev/null; then
+brew cask install virtualbox
+else
+echo "SKIPPING ~> virtualbox"
 fi
 
 
@@ -464,8 +463,12 @@ defaults write com.apple.Finder FXPreferredViewStyle Nlsv
 # Show the ~/Library folder.
 chflags nohidden ~/Library
 
-# Set a really fast key repeat.
-defaults write NSGlobalDomain KeyRepeat -int 0
+#Set a blazingly fast keyboard repeat rate
+defaults write NSGlobalDomain KeyRepeat -int 0.02
+
+#Set a shorter Delay until key repeat
+defaults write NSGlobalDomain InitialKeyRepeat -int 12
+
 
 # Set the Finder prefs for showing a few different volumes on the Desktop.
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
