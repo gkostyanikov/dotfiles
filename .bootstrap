@@ -87,7 +87,7 @@ fi
 
 if ! builtin type -p tmux -V &>/dev/null; then
 echo "INSTALLING ~> tmux"
-brew install https://gist.github.com/gkostyanikov/5848689/raw/12839555556286059a151c75161a493c5902cd52/tmux_iterm2.rb
+brew install tmux
 curl -O https://raw.github.com/gkostyanikov/dotfiles/master/.tmux.conf
 else
 echo "SKIPPING ~> tmux"
