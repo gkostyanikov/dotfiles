@@ -176,7 +176,7 @@ fi
 
 if ! builtin type -p vagrant &>/dev/null; then
 echo "INSTALLING ~> vagrant"
-gem install vagrant
+brew cask install vagrant
 else
 echo "SKIPPING ~> vagrant"
 fi
