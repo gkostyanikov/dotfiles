@@ -42,6 +42,14 @@ else
 echo "SKIPPING ~> git"
 fi
 
+if ! builtin type -p hg -v &>/dev/null; then
+echo "INSTALLING ~> hg"
+brew install python
+brew install hg
+else
+echo "SKIPPING ~> hg"
+fi
+
 if ! builtin type -p fish -v &>/dev/null; then
 echo "INSTALLING ~> fish"
 git clone https://github.com/fish-shell/fish-shell /tmp/fish-shell
