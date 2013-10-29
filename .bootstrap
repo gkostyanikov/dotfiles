@@ -10,6 +10,7 @@ echo "INSTALL XCODE BEFORE"
 exit
 else
 echo "XCODE ~> OK"
+xcode-select --install
 fi
 
 
