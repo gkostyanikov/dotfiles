@@ -182,6 +182,13 @@ else
 echo "SKIPPING ~> vagrant"
 fi
 
+if ! builtin type -p tree &>/dev/null; then
+echo "INSTALLING ~> tree"
+brew install tree
+else
+echo "SKIPPING ~> tree"
+fi
+
 curl https://raw.github.com/gkostyanikov/dotfiles/master/.gemrc > $HOME/.gemrc
 
 
