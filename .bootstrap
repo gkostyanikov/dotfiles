@@ -25,7 +25,7 @@ cd ~
 
 if ! builtin type -p brew &>/dev/null; then
 echo "INSTALLING ~> homebrew"
-ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 brew doctor
 brew install grc coreutils spark
 source `brew --prefix`/etc/grc.bashrc
