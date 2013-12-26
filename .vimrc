@@ -65,7 +65,7 @@ Bundle 'godlygeek/tabular'
 Bundle 'gkz/vim-ls'
 
 " Syntax, Indentination & Language-Centric Stuff
-Bundle 'git@github.com:slim-template/vim-slim.git'
+Bundle 'slim-template/vim-slim'
 Bundle 'cakebaker/scss-syntax.vim'
 Bundle 'c.vim'
 Bundle 'Markdown'
@@ -73,7 +73,6 @@ Bundle 'tpope/vim-rake'
 Bundle 'jimenezrick/vimerl'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'rails.vim'
-Bundle 'vim-scripts/slimv.vim'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'sickill/vim-pasta'
 Bundle 'Blackrush/vim-gocode'
@@ -131,3 +130,4 @@ vmap <C-k> ]egv
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|node_modules)$'
+let g:ctrlp_custom_ignore = 'vendor\/bundle$'
