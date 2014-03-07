@@ -60,12 +60,12 @@ Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-surround'
 Bundle 'unimpaired.vim'
 Bundle 'kien/ctrlp.vim'
+Bundle 'FelikZ/ctrlp-py-matcher'
 Bundle 'majutsushi/tagbar'
 Bundle 'godlygeek/tabular'
 Bundle 'gkz/vim-ls'
 
 " Syntax, Indentination & Language-Centric Stuff
-Bundle 'slim-template/vim-slim'
 Bundle 'cakebaker/scss-syntax.vim'
 Bundle 'c.vim'
 Bundle 'Markdown'
@@ -73,9 +73,11 @@ Bundle 'tpope/vim-rake'
 Bundle 'jimenezrick/vimerl'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'rails.vim'
+Bundle 'vim-scripts/slimv.vim'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'sickill/vim-pasta'
 Bundle 'Blackrush/vim-gocode'
+Bundle 'wting/rust.vim'
 
 " Other stuff
 Bundle 'ekoeppen/taskpaper.vim'
@@ -129,5 +131,19 @@ vmap <C-j> [egv
 vmap <C-k> ]egv
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|node_modules)$'
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = 'vendor\/bundle$'
+let g:ctrlp_lazy_update = 350
+let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_max_files = 0
+
+if !has('python')
+    echo 'In order to use pymatcher plugin, you need +python compiled vim'
+else
+    let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+endif
+
+if executable("ag")
+    set grepprg=ag\ --nogroup\ --nocolor
+    let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --ignore ''.git'' --ignore ''.DS_Store'' --ignore ''node_modules'' --hidden -g ""'
+endif
