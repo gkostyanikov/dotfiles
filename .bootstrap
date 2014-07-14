@@ -133,11 +133,6 @@ else
 echo "SKIPPING ~> nv-alt"
 fi
 
-if ! ls ~/Applications | grep Caffeine.app &>/dev/null; then
-brew cask install caffeine
-else
-echo "SKIPPING ~> caffeine"
-fi
 
 if ! ls ~/Applications | grep iTerm.app &>/dev/null; then
 brew cask install iterm2
@@ -145,17 +140,6 @@ else
 echo "SKIPPING ~> iterm2"
 fi
 
-if ! ls ~/Applications | grep Dropbox.app &>/dev/null; then
-brew cask install dropbox
-else
-echo "SKIPPING ~> dropbox"
-fi
-
-if ! ls ~/Applications | grep Google\ Chrome.app &>/dev/null; then
-brew cask install google-chrome
-else
-echo "SKIPPING ~> google-chrome"
-fi
 
 if ! ls ~/Applications | grep Transmission.app &>/dev/null; then
 brew cask install transmission
