@@ -128,7 +128,7 @@ fi
 
 
 if ! ls ~/Applications | grep nvALT.app &>/dev/null; then
-brew cask install nv-alt
+brew cask install nvalt
 else
 echo "SKIPPING ~> nv-alt"
 fi
@@ -148,9 +148,9 @@ echo "SKIPPING ~> transmission"
 fi
 
 if ! ls ~/Applications | grep Flux.app &>/dev/null; then
-brew cask install f-lux
+brew cask install flux
 else
-echo "SKIPPING ~> f-lux"
+echo "SKIPPING ~> flux"
 fi
 
 if ! ls /Applications | grep VirtualBox.app &>/dev/null; then
