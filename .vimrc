@@ -47,43 +47,46 @@ cmap w!! %!sudo tee > /dev/null %
 " Clear search highlights
 noremap <silent><Leader>/ :nohls<CR>
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
 " Productivity
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'terryma/vim-multiple-cursors'
-Bundle 'tpope/vim-endwise'
-Bundle 'scrooloose/syntastic'
-Bundle 'tpope/vim-surround'
-Bundle 'unimpaired.vim'
-Bundle 'kien/ctrlp.vim'
-Bundle 'FelikZ/ctrlp-py-matcher'
-Bundle 'majutsushi/tagbar'
-Bundle 'godlygeek/tabular'
-Bundle 'gkz/vim-ls'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'tpope/vim-endwise'
+Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-surround'
+Plugin 'unimpaired.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'FelikZ/ctrlp-py-matcher'
+Plugin 'majutsushi/tagbar'
+Plugin 'godlygeek/tabular'
+Plugin 'gkz/vim-ls'
 
 " Syntax, Indentination & Language-Centric Stuff
-Bundle 'cakebaker/scss-syntax.vim'
-Bundle 'c.vim'
-Bundle 'Markdown'
-Bundle 'tpope/vim-rake'
-Bundle 'jimenezrick/vimerl'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'rails.vim'
-Bundle 'vim-scripts/slimv.vim'
-Bundle 'derekwyatt/vim-scala'
-Bundle 'sickill/vim-pasta'
-Bundle 'Blackrush/vim-gocode'
-Bundle 'wting/rust.vim'
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'c.vim'
+Plugin 'Markdown'
+Plugin 'tpope/vim-rake'
+Plugin 'jimenezrick/vimerl'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'rails.vim'
+Plugin 'vim-scripts/slimv.vim'
+Plugin 'derekwyatt/vim-scala'
+Plugin 'sickill/vim-pasta'
+Plugin 'Blackrush/vim-gocode'
+Plugin 'wting/rust.vim'
+Plugin 'Lokaltog/vim-easymotion'
 
 " Other stuff
-Bundle 'ekoeppen/taskpaper.vim'
+Plugin 'ekoeppen/taskpaper.vim'
 
 "ColorScheme
-Bundle 'desert-warm-256'
+Plugin 'desert-warm-256'
+
+call vundle#end()
 
 filetype plugin indent on     " required!
 set t_Co=256
@@ -133,9 +136,10 @@ vmap <C-k> ]egv
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = 'vendor\/bundle$'
-let g:ctrlp_lazy_update = 350
+"let g:ctrlp_lazy_update = 350
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_max_files = 0
+let g:ctrlp_working_path_mode = 'a'
 
 if !has('python')
     echo 'In order to use pymatcher plugin, you need +python compiled vim'
