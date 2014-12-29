@@ -26,11 +26,20 @@ if ! builtin type -p brew &>/dev/null; then
 echo "INSTALLING ~> homebrew"
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew doctor
-source `brew --prefix`/etc/grc.bashrc
 brew tap phinze/homebrew-cask
 brew install brew-cask
 else
 echo "SKIPPING ~> homebrew"
+#brew update
+fi
+
+
+if ! builtin type -p brew cask &>/dev/null; then
+echo "INSTALLING ~> homebrew cask ext"
+brew tap phinze/homebrew-cask
+brew install brew-cask
+else
+echo "SKIPPING ~> homebrew cask ext"
 #brew update
 fi
 
