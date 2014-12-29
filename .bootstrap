@@ -10,7 +10,6 @@ echo "INSTALL XCODE BEFORE"
 exit
 else
 echo "XCODE ~> OK"
-xcode-select --install
 fi
 
 
@@ -27,7 +26,6 @@ if ! builtin type -p brew &>/dev/null; then
 echo "INSTALLING ~> homebrew"
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew doctor
-brew install grc coreutils spark
 source `brew --prefix`/etc/grc.bashrc
 brew tap phinze/homebrew-cask
 brew install brew-cask
