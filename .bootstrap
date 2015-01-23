@@ -884,7 +884,8 @@ for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
 done
 echo "Done. Note that some of these changes require a logout/restart to take effect."
 
-
+git config --global user.name "Georgy Kostyanikov"
+git config --global user.email heypandora@gmail.com
 
 
 echo "SSH KEYS GENERATION"
