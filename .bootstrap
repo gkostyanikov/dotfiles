@@ -857,12 +857,11 @@ git config --global user.email heypandora@gmail.com
 
 
 echo "SSH KEYS GENERATION"
-echo "============PASSPHRASE============"
-openssl rand -base64 40
-echo "============PASSPHRASE============"
 cd ~/.ssh
 echo $(openssl rand -base64 40) > .passphrase
+echo "============PASSPHRASE============"
 cat .passphrase
+echo "============PASSPHRASE============"
 echo "Enter your email > "
 read email
 ssh-keygen -t rsa -C "$email" -q -N $(cat .passphrase)
