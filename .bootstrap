@@ -46,7 +46,6 @@ fi
 
 if ! builtin type -p hg -v &>/dev/null; then
 echo "INSTALLING ~> hg"
-brew install python
 brew install hg
 else
 echo "SKIPPING ~> hg"
@@ -860,7 +859,7 @@ git config --global user.email "$email"
 
 
 echo "SSH KEYS GENERATION"
-cd ~/.ssh
+mkdir ~/.ssh && cd ~/.ssh
 echo $(openssl rand -base64 20) > .passphrase
 echo "============PASSPHRASE============"
 cat .passphrase
