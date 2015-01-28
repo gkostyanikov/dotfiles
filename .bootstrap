@@ -5,150 +5,6 @@
 # diskutil repairPermissions /
 # https://discussions.apple.com/thread/3353054?start=0&tstart=0
 
-if ! builtin type -p xcode-select --version &>/dev/null; then
-echo "INSTALL XCODE BEFORE"
-exit
-else
-echo "XCODE ~> OK"
-fi
-
-
-
-# Ask for the administrator password upfront
-sudo -v
-
-# Keep-alive: update existing `sudo` time stamp until `.osx` has finished
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
-
-cd ~
-
-if ! builtin type -p brew &>/dev/null; then
-echo "INSTALLING ~> homebrew"
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-brew doctor
-brew tap phinze/homebrew-cask
-brew update
-brew install brew-cask
-brew install autoconf
-else
-echo "SKIPPING ~> homebrew"
-#brew update
-fi
-
-
-
-if ! builtin type -p git &>/dev/null; then
-echo "INSTALLING ~> git"
-brew install git
-else
-echo "SKIPPING ~> git"
-fi
-
-if ! builtin type -p hg -v &>/dev/null; then
-echo "INSTALLING ~> hg"
-brew install hg
-else
-echo "SKIPPING ~> hg"
-fi
-
-if ! builtin type -p fish -v &>/dev/null; then
-echo "INSTALLING ~> fish"
-git clone https://github.com/fish-shell/fish-shell /tmp/fish-shell
-cd /tmp/fish-shell
-autoconf
-./configure
-make
-sudo make install
-grep -q '^/usr/local/bin/fish$' /etc/shells; or echo '/usr/local/bin/fish' | sudo tee -a /etc/shells
-chsh -s /usr/local/bin/fish
-curl https://raw.githubusercontent.com/gkostyanikov/dotfiles/master/config.fish > $HOME/.config/fish/config.fish
-else
-echo "SKIPPING ~> fish"
-fi
-
-if ! builtin type -p ag &>/dev/null; then
-echo "INSTALLING ~> the_siver_searcher"
-brew install the_silver_searcher
-else
-echo "SKIPPING ~> the_silver_searcher"
-fi
-
-if ! builtin type -p ssh-copy-id &>/dev/null; then
-echo "INSTALLING ~> ssh-copy-id"
-brew install ssh-copy-id
-else
-echo "SKIPPING ~> ssh-copy-id"
-fi
-
-
-
-if ! builtin type -p rbenv &>/dev/null; then
-echo "INSTALLING ~> rbenv"
-brew install rbenv
-git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
-# echo 'export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$HOME/.rbenv/bin:$PATH"' >> ~/.zshrc
-# echo 'eval "$(rbenv init -)"' >> ~/.zshrc
-# rbenv install 2.0.0-p195
-# rbenv global 2.0.0-p195
-else
-echo "SKIPPING ~> rbenv"
-fi
-
-
-if ! builtin type -p tmux -V &>/dev/null; then
-echo "INSTALLING ~> tmux"
-brew install tmux
-curl -O https://raw.githubusercontent.com/gkostyanikov/dotfiles/master/.tmux.conf
-else
-echo "SKIPPING ~> tmux"
-fi
-
-if ! builtin type -p vim -version &>/dev/null; then
-echo "INSTALLING ~> vim"
-brew install vim
-curl https://raw.githubusercontent.com/gkostyanikov/dotfiles/master/.vimrc > $HOME/.vimrc
-git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-vim +PluginInstall +qall
-cd ~/.vim/bundle/YouCompleteMe
-./install.sh --clang-completer
-else
-echo "SKIPPING ~> vim"
-fi
-
-
-if ! ls ~/Applications | grep nvALT.app &>/dev/null; then
-brew cask install nvalt
-else
-echo "SKIPPING ~> nv-alt"
-fi
-
-
-if ! ls ~/Applications | grep iTerm.app &>/dev/null; then
-brew cask install iterm2
-else
-echo "SKIPPING ~> iterm2"
-fi
-
-
-if ! ls ~/Applications | grep Transmission.app &>/dev/null; then
-brew cask install transmission
-else
-echo "SKIPPING ~> transmission"
-fi
-
-if ! ls ~/Applications | grep Flux.app &>/dev/null; then
-brew cask install flux
-else
-echo "SKIPPING ~> flux"
-fi
-
-if ! ls /Applications | grep VirtualBox.app &>/dev/null; then
-brew cask install virtualbox
-else
-echo "SKIPPING ~> virtualbox"
-fi
-
-
 
 # Set computer name (as done via System Preferences → Sharing)
 #sudo scutil --set ComputerName "0x6D746873"
@@ -850,6 +706,157 @@ for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
 	killall "${app}" > /dev/null 2>&1
 done
 echo "Done. Note that some of these changes require a logout/restart to take effect."
+
+
+
+
+
+if ! builtin type -p xcode-select --version &>/dev/null; then
+echo "INSTALL XCODE BEFORE"
+exit
+else
+echo "XCODE ~> OK"
+fi
+
+
+
+# Ask for the administrator password upfront
+sudo -v
+
+# Keep-alive: update existing `sudo` time stamp until `.osx` has finished
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+cd ~
+
+if ! builtin type -p brew &>/dev/null; then
+echo "INSTALLING ~> homebrew"
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew doctor
+brew tap phinze/homebrew-cask
+brew update
+brew install brew-cask
+brew install autoconf
+else
+echo "SKIPPING ~> homebrew"
+#brew update
+fi
+
+
+
+if ! builtin type -p git &>/dev/null; then
+echo "INSTALLING ~> git"
+brew install git
+else
+echo "SKIPPING ~> git"
+fi
+
+if ! builtin type -p hg -v &>/dev/null; then
+echo "INSTALLING ~> hg"
+brew install hg
+else
+echo "SKIPPING ~> hg"
+fi
+
+if ! builtin type -p fish -v &>/dev/null; then
+echo "INSTALLING ~> fish"
+git clone https://github.com/fish-shell/fish-shell /tmp/fish-shell
+cd /tmp/fish-shell
+autoconf
+./configure
+make
+sudo make install
+grep -q '^/usr/local/bin/fish$' /etc/shells; or echo '/usr/local/bin/fish' | sudo tee -a /etc/shells
+chsh -s /usr/local/bin/fish
+curl https://raw.githubusercontent.com/gkostyanikov/dotfiles/master/config.fish > $HOME/.config/fish/config.fish
+else
+echo "SKIPPING ~> fish"
+fi
+
+if ! builtin type -p ag &>/dev/null; then
+echo "INSTALLING ~> the_siver_searcher"
+brew install the_silver_searcher
+else
+echo "SKIPPING ~> the_silver_searcher"
+fi
+
+if ! builtin type -p ssh-copy-id &>/dev/null; then
+echo "INSTALLING ~> ssh-copy-id"
+brew install ssh-copy-id
+else
+echo "SKIPPING ~> ssh-copy-id"
+fi
+
+
+
+if ! builtin type -p rbenv &>/dev/null; then
+echo "INSTALLING ~> rbenv"
+brew install rbenv
+git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+# echo 'export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$HOME/.rbenv/bin:$PATH"' >> ~/.zshrc
+# echo 'eval "$(rbenv init -)"' >> ~/.zshrc
+# rbenv install 2.0.0-p195
+# rbenv global 2.0.0-p195
+else
+echo "SKIPPING ~> rbenv"
+fi
+
+
+if ! builtin type -p tmux -V &>/dev/null; then
+echo "INSTALLING ~> tmux"
+brew install tmux
+curl -O https://raw.githubusercontent.com/gkostyanikov/dotfiles/master/.tmux.conf
+else
+echo "SKIPPING ~> tmux"
+fi
+
+if ! builtin type -p vim -version &>/dev/null; then
+echo "INSTALLING ~> vim"
+brew install vim
+curl https://raw.githubusercontent.com/gkostyanikov/dotfiles/master/.vimrc > $HOME/.vimrc
+git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+vim +PluginInstall +qall
+cd ~/.vim/bundle/YouCompleteMe
+./install.sh --clang-completer
+else
+echo "SKIPPING ~> vim"
+fi
+
+
+if ! ls ~/Applications | grep nvALT.app &>/dev/null; then
+brew cask install nvalt
+else
+echo "SKIPPING ~> nv-alt"
+fi
+
+
+if ! ls ~/Applications | grep iTerm.app &>/dev/null; then
+brew cask install iterm2
+else
+echo "SKIPPING ~> iterm2"
+fi
+
+
+if ! ls ~/Applications | grep Transmission.app &>/dev/null; then
+brew cask install transmission
+else
+echo "SKIPPING ~> transmission"
+fi
+
+if ! ls ~/Applications | grep Flux.app &>/dev/null; then
+brew cask install flux
+else
+echo "SKIPPING ~> flux"
+fi
+
+if ! ls /Applications | grep VirtualBox.app &>/dev/null; then
+brew cask install virtualbox
+else
+echo "SKIPPING ~> virtualbox"
+fi
+
+
+
+
 
 echo "Enter your email > "
 read email
