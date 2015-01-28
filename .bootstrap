@@ -852,18 +852,19 @@ for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
 done
 echo "Done. Note that some of these changes require a logout/restart to take effect."
 
+echo "Enter your email > "
+read email
+
 git config --global user.name "Georgy Kostyanikov"
-git config --global user.email heypandora@gmail.com
+git config --global user.email "$email"
 
 
 echo "SSH KEYS GENERATION"
 cd ~/.ssh
-echo $(openssl rand -base64 40) > .passphrase
+echo $(openssl rand -base64 20) > .passphrase
 echo "============PASSPHRASE============"
 cat .passphrase
 echo "============PASSPHRASE============"
-echo "Enter your email > "
-read email
 ssh-keygen -t rsa -C "$email" -q -N $(cat .passphrase)
 pbcopy < ~/.ssh/id_rsa.pub
 
