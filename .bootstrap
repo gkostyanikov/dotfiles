@@ -736,6 +736,7 @@ brew tap phinze/homebrew-cask
 brew update
 brew install brew-cask
 brew install autoconf
+brew install cmake
 else
 echo "SKIPPING ~> homebrew"
 #brew update
