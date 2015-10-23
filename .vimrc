@@ -1,5 +1,6 @@
 set guifont=Monaco:h12
 set guioptions-=T
+"set guioptions-=e
 
 syntax on
 
@@ -10,12 +11,11 @@ set shell=/bin/bash
 set nocompatible               " be iMproved
 filetype off                   " required!
 "set invlist
-set shiftwidth=4
 set autoindent
 set autowrite
 set hlsearch
 set incsearch
-set textwidth=80
+"set textwidth=80
 set number
 "Exp section
 "set spell
@@ -28,6 +28,26 @@ set scrolljump=5
 set foldenable
 set scrolloff=3
 set noswapfile
+set shortmess=atI
+
+" Improve vim's scrolling speed
+set ttyfast
+set ttyscroll=3
+set lazyredraw
+set nostartofline
+
+
+set laststatus=2
+set showtabline=0
+
+"2 spaces
+set softtabstop=2
+set shiftwidth=2
+set tabstop=2
+set expandtab
+
+" Autoreload file and autosave on buffer focus enter/left
+au FocusGained,BufEnter,BufWinEnter,CursorHold,CursorMoved * :checktime
 
 
 " automatically reload vimrc when it's saved
@@ -47,63 +67,78 @@ cmap w!! %!sudo tee > /dev/null %
 " Clear search highlights
 noremap <silent><Leader>/ :nohls<CR>
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'gmarik/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 
 " Productivity
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'tpope/vim-endwise'
-Plugin 'scrooloose/syntastic'
-Plugin 'tpope/vim-surround'
-Plugin 'unimpaired.vim'
-Plugin 'kien/ctrlp.vim'
-Plugin 'FelikZ/ctrlp-py-matcher'
-Plugin 'majutsushi/tagbar'
-Plugin 'godlygeek/tabular'
-Plugin 'gkz/vim-ls'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer --gocode-completer' }
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-endwise'
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-surround'
+Plug 'unimpaired.vim'
+Plug 'majutsushi/tagbar'
+Plug 'gkz/vim-ls'
+Plug 'tpope/vim-flagship'
+Plug 'tpope/vim-fugitive'
 
 " Syntax, Indentination & Language-Centric Stuff
-Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'c.vim'
-Plugin 'Markdown'
-Plugin 'tpope/vim-rake'
-Plugin 'jimenezrick/vimerl'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'rails.vim'
-Plugin 'vim-scripts/slimv.vim'
-Plugin 'derekwyatt/vim-scala'
-Plugin 'sickill/vim-pasta'
-Plugin 'Blackrush/vim-gocode'
-Plugin 'wting/rust.vim'
-Plugin 'Lokaltog/vim-easymotion'
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'c.vim'
+Plug 'Markdown'
+Plug 'kchmck/vim-coffee-script'
+Plug 'guns/vim-clojure-static'
+Plug 'tpope/vim-rake'
+Plug 'tpope/vim-rails'
+Plug 'vim-ruby/vim-ruby'
+Plug 'slim-template/vim-slim'
+Plug 'derekwyatt/vim-scala'
+Plug 'Blackrush/vim-gocode'
+Plug 'wting/rust.vim'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'fatih/vim-go'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plug 'tpope/vim-vinegar'
+Plug 'chrisbra/csv.vim'
+Plug 'junegunn/vim-easy-align'
 
-" Other stuff
-Plugin 'ekoeppen/taskpaper.vim'
 
 "ColorScheme
-Plugin 'desert-warm-256'
+Plug 'desert-warm-256'
 
-call vundle#end()
+call plug#end()
+
+
+
 
 filetype plugin indent on     " required!
 set t_Co=256
 colorscheme desert-warm-256
 
+
+
 " Mappings
-let g:ctrlp_map        = '<C-p>'
-let g:ctrlp_cmd        = 'CtrlPLastMode'
-let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
+
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
 
 let g:rubycomplete_buffer_loading = 1
 let g:rubycomplete_rails          = 1
 let mapleader                     = ','
 
 nmap <Leader><C-t> :TagbarToggle<CR>
-nmap <Leader><C-c> :CtrlPClearCache<CR>
+nmap <C-p> :FZF<CR>
 
+"Go highlights
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+"end
 
 map <D-S-]> gt
 map <D-S-[> gT
@@ -124,8 +159,10 @@ vmap <D-]> >gv
 
 nmap <Leader>l :set list!<CR>
 
+cnoremap w!! %!sudo tee > /dev/null %
 
-"au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+
+autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
  
 "Bubble singe lines
 nmap <C-j> [e
@@ -134,20 +171,30 @@ vmap <C-j> [egv
 vmap <C-k> ]egv
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-let g:ctrlp_custom_ignore = 'vendor\/bundle$'
-"let g:ctrlp_lazy_update = 350
-let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_max_files = 0
-let g:ctrlp_working_path_mode = 'a'
 
-if !has('python')
-    echo 'In order to use pymatcher plugin, you need +python compiled vim'
-else
-    let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-endif
+" Disable output and VCS files
+set wildignore+=*.o,*.out,*.obj,.git,*.rbc,*.rbo,*.class,.svn,*.gem
 
-if executable("ag")
-    set grepprg=ag\ --nogroup\ --nocolor
-    let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --ignore ''.git'' --ignore ''.DS_Store'' --ignore ''node_modules'' --hidden -g ""'
-endif
+" Ignore images and log files
+set wildignore+=*.gif,*.jpg,*.png,*.log
+
+" Disable archive files
+set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz
+
+" Ignore bundler and sass cache
+set wildignore+=*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*/.sass-cache/*
+
+" Ignore rails temporary asset caches
+set wildignore+=*/tmp/cache/assets/*/sprockets/*,*/tmp/cache/assets/*/sass/*
+
+" Ignore custom folders
+set wildignore+=*/resources/*
+
+" Ignore node modules
+set wildignore+=node_modules/*
+
+" Disable temp and backup files
+set wildignore+=*.swp,*~,._*
+
+" Disable osx index files
+set wildignore+=.DS_Store
