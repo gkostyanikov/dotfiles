@@ -734,9 +734,7 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 brew doctor
 brew tap phinze/homebrew-cask
 brew update
-brew install brew-cask
-brew install autoconf
-brew install cmake
+brew install brew-cask autoconf cmake
 else
 echo "SKIPPING ~> homebrew"
 #brew update
@@ -766,18 +764,20 @@ autoconf
 ./configure
 make
 sudo make install
+#problems with echoing string to /etc/shells
 grep -q '^/usr/local/bin/fish$' /etc/shells; or echo '/usr/local/bin/fish' | sudo tee -a /etc/shells
 chsh -s /usr/local/bin/fish
+#need to create all path befor curl(init fish shell for the first time)
 curl https://raw.githubusercontent.com/gkostyanikov/dotfiles/master/config.fish > $HOME/.config/fish/config.fish
 else
 echo "SKIPPING ~> fish"
 fi
 
 if ! builtin type -p ag &>/dev/null; then
-echo "INSTALLING ~> the_siver_searcher"
-brew install the_silver_searcher
+echo "INSTALLING ~> ag
+brew install ag
 else
-echo "SKIPPING ~> the_silver_searcher"
+echo "SKIPPING ~> ag"
 fi
 
 if ! builtin type -p ssh-copy-id &>/dev/null; then
@@ -792,11 +792,6 @@ fi
 if ! builtin type -p rbenv &>/dev/null; then
 echo "INSTALLING ~> rbenv"
 brew install rbenv
-git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
-# echo 'export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$HOME/.rbenv/bin:$PATH"' >> ~/.zshrc
-# echo 'eval "$(rbenv init -)"' >> ~/.zshrc
-# rbenv install 2.0.0-p195
-# rbenv global 2.0.0-p195
 else
 echo "SKIPPING ~> rbenv"
 fi
@@ -810,31 +805,18 @@ else
 echo "SKIPPING ~> tmux"
 fi
 
-if ! builtin type -p vim -version &>/dev/null; then
-echo "INSTALLING ~> vim"
-brew install vim
+if ! builtin type -p nvim -version &>/dev/null; then
+echo "INSTALLING ~> nvim"
+brew tap neovim/neovim
+brew install --HEAD neovim
 curl https://raw.githubusercontent.com/gkostyanikov/dotfiles/master/.vimrc > $HOME/.vimrc
-git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-vim +PluginInstall +qall
-cd ~/.vim/bundle/YouCompleteMe
-./install.sh --clang-completer
+ln -s ~/.vimrc ~/.nvimrc
+ln -s ~/.vim ~/.nvim
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 else
-echo "SKIPPING ~> vim"
+echo "SKIPPING ~> nvim"
 fi
 
-
-if ! ls ~/Applications | grep nvALT.app &>/dev/null; then
-brew cask install nvalt
-else
-echo "SKIPPING ~> nv-alt"
-fi
-
-
-if ! ls ~/Applications | grep iTerm.app &>/dev/null; then
-brew cask install iterm2
-else
-echo "SKIPPING ~> iterm2"
-fi
 
 
 if ! ls ~/Applications | grep Transmission.app &>/dev/null; then
@@ -843,11 +825,6 @@ else
 echo "SKIPPING ~> transmission"
 fi
 
-if ! ls ~/Applications | grep Flux.app &>/dev/null; then
-brew cask install flux
-else
-echo "SKIPPING ~> flux"
-fi
 
 if ! ls /Applications | grep VirtualBox.app &>/dev/null; then
 brew cask install virtualbox
