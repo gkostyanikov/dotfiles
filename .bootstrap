@@ -791,7 +791,7 @@ fi
 
 if ! builtin type -p rbenv &>/dev/null; then
 echo "INSTALLING ~> rbenv"
-brew install rbenv
+brew install rbenv --HEAD
 else
 echo "SKIPPING ~> rbenv"
 fi
