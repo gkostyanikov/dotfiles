@@ -2,6 +2,7 @@ set fish_greeting
 set -x PATH /usr/local/bin $PATH
 set -x PATH $HOME/repo/go/bin $PATH
 set -x PATH $HOME/repos/golang/bin $PATH
+set -x PATH $HOME/.cargo/bin $PATH
 
 set -x DOCKER_HOST tcp://boot2docker:2376
 set -x DOCKER_CERT_PATH $HOME/.boot2docker/certs/boot2docker-vm
