@@ -3,6 +3,7 @@ set guioptions-=T
 "set guioptions-=e
 
 syntax on
+set termguicolors
 
 set shell=/bin/bash
 
@@ -72,7 +73,7 @@ noremap <silent><Leader>/ :nohls<CR>
 call plug#begin('~/.vim/plugged')
 
 " Productivity
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer --clang-completer --gocode-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer --clang-completer --gocode-completer --racer-completer' }
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-endwise'
 Plug 'scrooloose/syntastic'
@@ -106,10 +107,14 @@ Plug 'junegunn/vim-easy-align'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'Raimondi/delimitMate'
+Plug 'tpope/vim-obsession'
+Plug 'tmux-plugins/vim-tmux'
+"Plug 'racer-rust/vim-racer'
 
 
 "ColorScheme
-Plug 'desert-warm-256'
+"Plug 'desert-warm-256'
+Plug 'w0ng/vim-hybrid'
 
 call plug#end()
 
@@ -118,7 +123,9 @@ call plug#end()
 
 filetype plugin indent on     " required!
 "set t_Co=256
-colorscheme desert-warm-256
+"colorscheme hybridolorscheme desert-warm-256
+set background=dark
+colorscheme hybrid
 
 "slim highlights for slm ft
 autocmd BufNewFile,BufRead *.slm set ft=slim
@@ -169,6 +176,7 @@ nmap <Leader>l :set list!<CR>
 
 cnoremap w!! %!sudo tee > /dev/null %
 
+autocmd FileType c nnoremap <buffer> <silent> <C-]> :YcmCompleter GoTo<cr>
 
 autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
@@ -209,3 +217,5 @@ set wildignore+=*.swp,*~,._*
 set wildignore+=.DS_Store
 "let g:python_host_prog = "/usr/local/lib/python2.7/site-packages"
 "let g:python3_host_prog = "/usr/local/lib/python3.5/site-packages"
+"
+let g:ycm_rust_src_path = '$HOME/.rust/src/'
