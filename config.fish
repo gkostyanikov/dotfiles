@@ -1,15 +1,22 @@
 set fish_greeting
 set -x PATH /usr/local/bin $PATH
-set -x PATH $HOME/repo/go/bin $PATH
-set -x PATH $HOME/repos/golang/bin $PATH
-set -x PATH $HOME/.cargo/bin $PATH
+#set -x PATH $HOME/repo/go/bin $PATH
+#set -x PATH $HOME/repos/golang/bin $PATH
+#set -x PATH $HOME/.cargo/bin $PATH
+#set -x PATH /usr/local/m-cli $PATH
 
-set -x DOCKER_HOST tcp://boot2docker:2376
-set -x DOCKER_CERT_PATH $HOME/.boot2docker/certs/boot2docker-vm
-set -x DOCKER_TLS_VERIFY 1
+#set -x GOPATH $HOME/repos/golang
+#set -x RUST_SRC_PATH $HOME/.rust/src
 
-set -x GOPATH $HOME/repos/golang
-set -x FZF_DEFAULT_COMMAND 'ag -l -g ""'
 
-set -gx RBENV_ROOT /usr/local/var/rbenv
+set -x FZF_DEFAULT_COMMAND 'rg --files --hidden --follow --glob "!.git/*"'
+
+set -gx RBENV_ROOT /usr/local/var/rbenv  
 . (rbenv init -|psub)
+
+set -gx DOCKER_TLS_VERIFY "1";
+set -gx DOCKER_HOST "tcp://192.168.99.100:2376";
+set -gx DOCKER_CERT_PATH "/Users/gkostyanikov/.docker/machine/machines/dev";
+set -gx DOCKER_MACHINE_NAME "dev";
+
+set -g fish_escape_delay_ms 100
