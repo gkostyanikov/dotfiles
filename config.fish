@@ -6,7 +6,7 @@ set -x PATH /usr/local/bin $PATH
 #set -x PATH /usr/local/m-cli $PATH
 
 #set -x GOPATH $HOME/repos/golang
-#set -x RUST_SRC_PATH $HOME/.rust/src
+set -x RUST_SRC_PATH $HOME/.rust/src
 
 
 set -x FZF_DEFAULT_COMMAND 'rg --files --hidden --follow --glob "!.git/*"'
