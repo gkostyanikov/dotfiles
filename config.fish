@@ -11,8 +11,8 @@ set -x RUST_SRC_PATH $HOME/.rust/src
 
 set -x FZF_DEFAULT_COMMAND 'rg --files --hidden --follow --glob "!.git/*"'
 
-set -gx RBENV_ROOT /usr/local/var/rbenv  
-. (rbenv init -|psub)
+. /usr/local/opt/chruby/share/chruby/chruby.sh
+. /usr/local/opt/chruby/share/chruby/auto.sh
 
 set -gx DOCKER_TLS_VERIFY "1";
 set -gx DOCKER_HOST "tcp://192.168.99.100:2376";
